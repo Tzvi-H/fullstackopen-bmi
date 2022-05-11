@@ -1,3 +1,22 @@
+interface ArgvExerciseValues {
+  target: number;
+  exercises: Array<number>;
+}
+
+const parseArguments = (args: Array<string>): ArgvExerciseValues => {
+  if (args.length < 4) throw new Error("Not enough arguments");
+
+  const argNums = args.slice(2).map((a) => Number(a));
+  if (!argNums.some((n) => isNaN(n))) {
+    return {
+      target: argNums[0],
+      exercises: argNums.slice(1),
+    };
+  } else {
+    throw new Error("Provided values were not numbers!");
+  }
+};
+
 interface ExerciseValues {
   periodLength: number;
   trainingDays: number;
@@ -40,15 +59,13 @@ const calculateExercises = (
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 1.9));
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 20));
-/*
-{ periodLength: 7,
-  trainingDays: 5,
-  success: false,
-  rating: 2,
-  ratingDescription: 'not too bad but could be better',
-  target: 2,
-  average: 1.9285714285714286 }
-*/
+try {
+  const { target, exercises } = parseArguments(process.argv);
+  console.log(calculateExercises(exercises, target));
+} catch (error: unknown) {
+  let errorMessage = "Something bad happened.";
+  if (error instanceof Error) {
+    errorMessage += " Error: " + error.message;
+  }
+  console.log(errorMessage);
+}
