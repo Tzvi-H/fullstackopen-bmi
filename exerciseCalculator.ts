@@ -1,21 +1,21 @@
-interface ArgvExerciseValues {
-  target: number;
-  exercises: Array<number>;
-}
+// interface ArgvExerciseValues {
+//   target: number;
+//   exercises: Array<number>;
+// }
 
-const parseArguments = (args: Array<string>): ArgvExerciseValues => {
-  if (args.length < 4) throw new Error("Not enough arguments");
+// const parseArguments = (args: Array<string>): ArgvExerciseValues => {
+//   if (args.length < 4) throw new Error("Not enough arguments");
 
-  const argNums = args.slice(2).map((a) => Number(a));
-  if (!argNums.some((n) => isNaN(n))) {
-    return {
-      target: argNums[0],
-      exercises: argNums.slice(1),
-    };
-  } else {
-    throw new Error("Provided values were not numbers!");
-  }
-};
+//   const argNums = args.slice(2).map((a) => Number(a));
+//   if (!argNums.some((n) => isNaN(n))) {
+//     return {
+//       target: argNums[0],
+//       exercises: argNums.slice(1),
+//     };
+//   } else {
+//     throw new Error("Provided values were not numbers!");
+//   }
+// };
 
 interface ExerciseValues {
   periodLength: number;
@@ -59,13 +59,15 @@ const calculateExercises = (
   };
 };
 
-try {
-  const { target, exercises } = parseArguments(process.argv);
-  console.log(calculateExercises(exercises, target));
-} catch (error: unknown) {
-  let errorMessage = "Something bad happened.";
-  if (error instanceof Error) {
-    errorMessage += " Error: " + error.message;
-  }
-  console.log(errorMessage);
-}
+// try {
+//   const { target, exercises } = parseArguments(process.argv);
+//   console.log(calculateExercises(exercises, target));
+// } catch (error: unknown) {
+//   let errorMessage = "Something bad happened.";
+//   if (error instanceof Error) {
+//     errorMessage += " Error: " + error.message;
+//   }
+//   console.log(errorMessage);
+// }
+
+export default calculateExercises;
